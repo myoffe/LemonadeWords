@@ -10,16 +10,43 @@ DATA_FILENAME = 'data.pickle'
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello():
-    return "Hello Lemonade!"
-
-
 @app.route('/count', methods=['POST'])
 def count():
-    text = request.json['text']
-    words = get_words(text)
+    json = request.json
+    input_type = json.get('type')
+    input = request.get('input')
+    if input_type == 'string':
+        return count_string(input)
+    elif input_type == 'file':
+        return count_file(input);
+
+
+def count_string(input):
+    words = get_words(input)
     freqs = Counter(words)
+    update_data(freqs)
+    return frequencies_string(freqs)
+
+
+# TODO lots of untested stuff
+# TODO refactor a bit
+def count_file(filename):
+    with open(filename, 'r') as file:
+        def read_chunk_full_words():
+            data = file.read(1024)
+            extra = ''
+            new_char = file.read(1)
+            while new_char.isalpha():
+                extra += new_char
+                new_char = file.read(1)
+
+            return ''.join([data, extra])
+
+        freqs = Counter()
+        for chunk in iter(read_chunk_full_words, ''):
+            words = get_words(chunk)
+            freqs.update(Counter(words))
+
     update_data(freqs)
     return frequencies_string(freqs)
 
