@@ -99,5 +99,5 @@ def init_datafile_if_needed():
             serialize(Counter(), file)
 
 
-def get_words(s):
-    return re.sub('[^a-zA-Z]', ' ', s).lower().split()
+def get_words(chunk):
+    return re.sub('[^a-zA-Z]', ' ', chunk).lower().split()
