@@ -24,4 +24,4 @@ def count():
 @app.route('/stats/<word>', methods=['GET'])
 def stats(word):
     freqs = read_data()
-    return str(freqs.get(word))
+    return str(freqs.get(word) or 0)
