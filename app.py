@@ -13,12 +13,12 @@ app = Flask(__name__)
 @app.route('/count', methods=['POST'])
 def count():
     json = request.json
-    input_type = json.get('type')
-    input = request.get('input')
-    if input_type == 'string':
-        return count_string(input)
-    elif input_type == 'file':
-        return count_file(input);
+    if 'text' in json:
+        return count_string(json['text'])
+    elif 'file' in json:
+        return count_file(json['file'])
+    else:
+        return 'no inputs provided'
 
 
 def count_string(input):
