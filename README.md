@@ -26,6 +26,11 @@ POST http://localhost:5000/count
   "url": "https://www.lemonade.com/"
 }
 
+POST http://localhost:5000/count
+{
+	"xkcd": "303"
+}
+
 GET http://localhost:5000/stats/my
 GET http://localhost:5000/stats/lemonade
 GET http://localhost:5000/stats/everything
