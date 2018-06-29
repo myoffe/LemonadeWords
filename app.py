@@ -28,7 +28,6 @@ def count_string(input):
     return frequencies_string(freqs)
 
 
-# TODO lots of untested stuff
 # TODO refactor a bit
 def count_file(filename):
     with open(filename, 'r') as file:
