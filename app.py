@@ -18,7 +18,7 @@ def count():
     elif 'url' in json:
         return count_url(json['url'])
     else:
-        return 'no inputs provided'
+        return 'Expected one of: text, file, url'
 
 
 @app.route('/stats/<word>', methods=['GET'])
