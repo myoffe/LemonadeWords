@@ -12,16 +12,17 @@ app = Flask(__name__)
 @app.route('/count', methods=['POST'])
 def count():
     json = request.json
-    if 'text' in json:
-        return count_text(json['text'])
-    elif 'file' in json:
-        return count_file(json['file'])
-    elif 'url' in json:
-        return count_url(json['url'])
-    elif 'xkcd' in json:
-        return count_xkcd(json['xkcd'])
-    else:
-        return 'Expected one of: text, file, url'
+    if len(json) == 0: return 'Expected one of: text, file, url, xkcd'
+
+    counter_funcs = {
+        'text': count_text,
+        'file': count_file,
+        'url': count_url,
+        'xkcd': count_xkcd
+    }
+
+    key, value = next(iter(json.items()))
+    return counter_funcs[key](value)
 
 
 @app.route('/stats/<word>', methods=['GET'])
