@@ -100,4 +100,4 @@ def init_datafile_if_needed():
 
 
 def get_words(s):
-    return re.sub('\W', ' ', s).lower().split()
+    return re.sub('[^a-zA-Z]', ' ', s).lower().split()
