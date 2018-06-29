@@ -4,6 +4,7 @@ from data import read_data
 from file_counter import count_file
 from text_counter import count_text
 from url_counter import count_url
+from xkcd_counter import count_xkcd
 
 app = Flask(__name__)
 
@@ -17,6 +18,8 @@ def count():
         return count_file(json['file'])
     elif 'url' in json:
         return count_url(json['url'])
+    elif 'xkcd' in json:
+        return count_xkcd(json['xkcd'])
     else:
         return 'Expected one of: text, file, url'
 
