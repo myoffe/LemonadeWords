@@ -3,6 +3,7 @@ from flask import Flask, request
 from data import read_data
 from file_counter import count_file
 from text_counter import count_text
+from url_counter import count_url
 
 app = Flask(__name__)
 
@@ -14,6 +15,8 @@ def count():
         return count_text(json['text'])
     elif 'file' in json:
         return count_file(json['file'])
+    elif 'url' in json:
+        return count_url(json['url'])
     else:
         return 'no inputs provided'
 
